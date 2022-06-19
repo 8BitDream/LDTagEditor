@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     WebView webView;
 
     /* Access modifiers changed, original: protected */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
     public void onResume() {
         super.onResume();
         if (this.nfc != null) {
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
     public void onPause() {
         super.onPause();
         if (this.nfc != null) {
@@ -98,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
     public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
         this.tag = (Tag) intent.getParcelableExtra("android.nfc.extra.TAG");
         Log.i("Foreground dispatch", "Discovered tag");
         callJavaScript("AndroidApp.tagDetected", new Object[0]);
@@ -113,9 +118,9 @@ public class MainActivity extends AppCompatActivity {
         stringBuilder.append(methodName);
         stringBuilder.append("'))(");
         for (Object param : params) {
-            Object param2;
-            if (!(param2 instanceof String)) {
-                param2 = param2.toString();
+            String param2 = "";
+            if (!(param instanceof String)) {
+                param2 = param.toString();
             }
             stringBuilder.append("'");
             stringBuilder.append(param2);

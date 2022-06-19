@@ -55,6 +55,7 @@ public class JSAPI {
                 }
             }
         }
+        return null;
     }
 
     @JavascriptInterface
@@ -109,9 +110,9 @@ public class JSAPI {
         stringBuilder.append(methodName);
         stringBuilder.append("'))(");
         for (Object param : params) {
-            Object param2;
-            if (!(param2 instanceof String)) {
-                param2 = param2.toString();
+            Object param2 = "";
+            if (!(param instanceof String)) {
+                param2 = param.toString();
             }
             stringBuilder.append("'");
             stringBuilder.append(param2);
